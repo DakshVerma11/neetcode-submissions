@@ -1,3 +1,6 @@
+#istead of thinking along dfs of each path think along the lines of swapping different values with each other
+
+
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         res=[]
