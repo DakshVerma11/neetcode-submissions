@@ -1,0 +1,23 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        adj = defaultdict(list)
+        in_degree = [0] * numCourses
+        
+        for course, pre in prerequisites:
+            adj[pre].append(course)
+            in_degree[course] += 1
+            
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        res = []
+        
+        while queue:
+            curr = queue.popleft()
+            res.append(curr)
+            for neighbor in adj[curr]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        return res if len(res) == numCourses else []
+            
